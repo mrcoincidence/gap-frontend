@@ -1,69 +1,431 @@
-import Image from "next/image";
+// app/page.tsx
+'use client';
+
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Home() {
+  const shopProducts = [
+    {
+      id: 1,
+      name: 'CashSoft カシミヤタッチ ジップアップパーカー',
+      price: '¥ 11,900',
+      img: '/images/products/shop-now-01.jpg',
+      url: 'https://www.gap.co.jp/gap/cashsoft-zip-hoodie/1186092026.html?mlink=JP_HP_EINSTEIN_RECENTLY',
+      colors: [
+        { name: 'ネイビー', hex: '#002554' },
+        { name: 'ヘザーグレー', hex: '#9e9e9e' },
+        { name: 'ブラック', hex: '#111111' },
+        { name: 'ベージュ', hex: '#d4b89b' },
+      ],
+    },
+    {
+      id: 2,
+      name: 'CashSoft カシミヤタッチ リラックスフィット GAPロゴセーター',
+      price: '¥ 10,900',
+      img: '/images/products/shop-now-02.jpg',
+      url: 'https://www.gap.co.jp/gap/cashsoft-relaxed-logo-sweater/908042006.html?mlink=JP_HP_EINSTEIN_RECENTLY',
+      colors: [
+        { name: 'ナチュラル', hex: '#f0ede6' },
+        { name: 'ネイビー', hex: '#002554' },
+        { name: 'ブラウン', hex: '#5c4033' },
+      ],
+    },
+    {
+      id: 3,
+      name: 'リラックスフィット GAPロゴパーカー (キッズ)',
+      price: '¥ 6,990',
+      img: '/images/products/shop-now-03.jpg',
+      url: 'https://www.gap.co.jp/gap/kids-relaxed-gap-logo-hoodie/915580016.html?mlink=JP_HP_EINSTEIN_RECENTLY',
+      colors: [
+        { name: 'グリーン', hex: '#4a7c59' },
+        { name: 'レッド', hex: '#dc3545' },
+        { name: 'グレー', hex: '#bcbcbc' },
+        { name: 'イエロー', hex: '#eab308' },
+      ],
+    },
+    {
+      id: 4,
+      name: 'グラフィック ドルマンTシャツ (キッズ)',
+      price: '¥ 3,990',
+      img: '/images/products/shop-now-04.jpg',
+      url: 'https://www.gap.co.jp/gap/kids-graphic-dolman-t-shirt/1181307006.html?mlink=JP_HP_EINSTEIN_RECENTLY',
+      colors: [
+        { name: 'ホワイト', hex: '#ffffff' },
+        { name: 'ピンク', hex: '#f43f5e' },
+        { name: 'ライトブルー', hex: '#38bdf8' },
+      ],
+    },
+  ];
+
+  const promoBanners = [
+    {
+      title: 'DENIM COLLECTION',
+      subtitle: '洗練されたシルエットと究極の履き心地',
+      img: '/images/campaigns/banner-01.jpg',
+    },
+    {
+      title: 'GAP LOGO SWEATS',
+      subtitle: 'アイコンロゴで楽しむ秋のスタイリング',
+      img: '/images/campaigns/banner-02.jpg',
+    },
+    {
+      title: 'OUTERWEAR SPECIAL',
+      subtitle: '季節の変わり目に映えるライトアウター',
+      img: '/images/campaigns/banner-03.jpg',
+    },
+  ];
+
+  // 定番プロダクト背景透過サムネイル
+  const essentialCategories = [
+    { name: 'Tシャツ', img: '/images/products/thum-tshirt.png', fallback: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=300&auto=format&fit=crop&q=80' },
+    { name: 'パーカー', img: '/images/products/thum-hoodie.png', fallback: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=300&auto=format&fit=crop&q=80' },
+    { name: 'セーター', img: '/images/products/thum-sweater.png', fallback: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&auto=format&fit=crop&q=80' },
+    { name: 'ジーンズ', img: '/images/products/thum-jeans.png', fallback: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300&auto=format&fit=crop&q=80' },
+    { name: 'チノパンツ', img: '/images/products/thum-chino.png', fallback: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=300&auto=format&fit=crop&q=80' },
+  ];
+
+  // 4カラム・カテゴリーテキストリンク
+  const seoNavigationColumns = [
+    {
+      title: 'ピックアップ',
+      links: [
+        'すべての新着商品',
+        'ベストセラー・人気商品',
+        '秋のおすすめアイテム',
+        'GAP 1969 デニムコレクション',
+        'CashSoft カシミヤタッチ',
+      ],
+    },
+    {
+      title: 'ジーンズ',
+      links: [
+        'すべてのジーンズ',
+        'ルーズフィット デニム',
+        'ストレート デニム',
+        'スリムフィット デニム',
+        'デニムジャケット',
+      ],
+    },
+    {
+      title: 'パーカー',
+      links: [
+        'すべてのパーカー＆スウェット',
+        'GAPロゴ パーカー',
+        'ジップアップパーカー',
+        'クルーネックスウェット',
+        'オーバーサイズ フーディー',
+      ],
+    },
+    {
+      title: 'アクセサリー',
+      links: [
+        'すべてのアクセサリー',
+        'キャップ＆ハット',
+        'バッグ＆バックパック',
+        'ソックス＆アンダーウェア',
+        'ベルト＆小物',
+      ],
+    },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="min-h-screen bg-white font-sans">
+      
+      {/* ヘッダー */}
+      <Header />
+
+      {/* メインコンテンツ */}
+      <main className="w-full">
+        
+        {/* =========================================================
+           1. Main Hero section
+           ========================================================= */}
+        <section className="relative w-full h-[calc(100vh-120px)] min-h-[500px] bg-black overflow-hidden flex items-end p-24 md:p-40">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/images/hero/main-hero.jpg"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <source src="/videos/hero-video.mp4" type="video/mp4" />
+          </video>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+
+          <div className="relative z-10 text-left text-white max-w-[800px]">
+            <div className="mb-16">
+              <img 
+                src="/images/logo/logo-gap-apc.svg" 
+                alt="GAP × A.P.C." 
+                className="h-36 md:h-52 w-auto object-contain"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const parent = e.currentTarget.parentElement;
+                  if (parent && !parent.querySelector('.logo-apc-fallback')) {
+                    const fallback = document.createElement('h1');
+                    fallback.className = 'logo-apc-fallback text-36 md:text-50 font-bold tracking-tight drop-shadow-md';
+                    fallback.innerText = 'GAP × A.P.C.';
+                    parent.appendChild(fallback);
+                  }
+                }}
+              />
+            </div>
+
+            <p className="text-[20px] font-medium mb-24 opacity-90 drop-shadow leading-snug">
+              ふたつの世界。ひとつのコレクション。エフォートレスなスタイルという共通言語
+            </p>
+
+            <div>
+              <a 
+                href="#" 
+                className="inline-block bg-white text-gap-navy border-2 border-white font-bold text-14 px-16 py-6 transition-all duration-300 hover:bg-transparent hover:text-white uppercase tracking-wider"
+              >
+                コレクションをチェック
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================
+           2. Sub Hero section
+           ========================================================= */}
+        <section className="w-full grid grid-cols-1 md:grid-cols-2">
+          <div className="relative h-[80vh] md:h-[calc(100vh-100px)] min-h-[450px] bg-black overflow-hidden flex items-end p-24 md:p-40">
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="absolute inset-0 w-full h-full object-cover"
+              poster="/images/hero/sub-hero-left.jpg"
+            >
+              <source src="/videos/sub-hero-01.mp4" type="video/mp4" />
+            </video>
+            
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+            <div className="relative z-10 text-white">
+              <h2 className="text-28 md:text-35 font-bold mb-8">WOMEN'S FALL ESSENTIALS</h2>
+              <p className="text-14 md:text-16 mb-12 opacity-90">快適さと洗練を両立した秋のウィメンズスタイル</p>
+              <div>
+                <a 
+                  href="#" 
+                  className="inline-block bg-white text-gap-navy border-2 border-white font-bold text-14 px-16 py-6 transition-all duration-300 hover:bg-transparent hover:text-white uppercase tracking-wider"
+                >
+                  ウィメンズをショップ
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative h-[80vh] md:h-[calc(100vh-100px)] min-h-[450px] bg-black overflow-hidden flex items-end p-24 md:p-40">
+            <video 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+              className="absolute inset-0 w-full h-full object-cover"
+              poster="/images/hero/sub-hero-right.jpg"
+            >
+              <source src="/videos/sub-hero-02.mp4" type="video/mp4" />
+            </video>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+            <div className="relative z-10 text-white">
+              <h2 className="text-28 md:text-35 font-bold mb-8">MEN'S MODERN DENIM</h2>
+              <p className="text-14 md:text-16 mb-12 opacity-90">上質なファブリックと多様なシルエットのメンズデニム</p>
+              <div>
+                <a 
+                  href="#" 
+                  className="inline-block bg-white text-gap-navy border-2 border-white font-bold text-14 px-16 py-6 transition-all duration-300 hover:bg-transparent hover:text-white uppercase tracking-wider"
+                >
+                  メンズをショップ
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =========================================================
+           3. Shop now section
+           ========================================================= */}
+        <section className="max-w-[1600px] mx-auto px-16 lg:px-24 py-48 md:py-64">
+          <div className="flex items-center justify-between mb-24">
+            <h2 className="text-24 md:text-28 font-bold text-gap-dark">SHOP NOW</h2>
+            
+            <div className="flex items-center gap-16">
+              <a href="#" className="text-13 font-bold text-gap-dark hover:text-gap-navy">
+                全て見る →
+              </a>
+              <div className="flex gap-8">
+                <button className="p-8 border border-gap-border-dark rounded-full hover:bg-gap-gray" aria-label="前へ">
+                  <ChevronLeft size={18} />
+                </button>
+                <button className="p-8 border border-gap-border-dark rounded-full hover:bg-gap-gray" aria-label="次へ">
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-16 md:gap-24 overflow-x-auto">
+            {shopProducts.map((product) => (
+              <a 
+                key={product.id} 
+                href={product.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer block"
+              >
+                <div className="relative aspect-[3/4] bg-gap-gray overflow-hidden mb-12 border border-gap-border">
+                  <img 
+                    src={product.img} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      e.currentTarget.src = 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&auto=format&fit=crop&q=80';
+                    }}
+                  />
+                </div>
+
+                <h3 className="text-14 font-bold text-gap-dark mb-4 truncate group-hover:underline">
+                  {product.name}
+                </h3>
+
+                <p className="text-14 font-bold text-gap-dark mb-4">{product.price}</p>
+
+                <div className="flex items-center gap-6 py-6 px-4 overflow-visible">
+                  {product.colors.map((col, cIndex) => (
+                    <span 
+                      key={cIndex}
+                      title={col.name}
+                      style={{ backgroundColor: col.hex }}
+                      className={`inline-block w-[18px] h-[18px] rounded-full border border-gap-border-dark flex-shrink-0 ${
+                        cIndex === 0 ? 'ring-2 ring-gap-dark ring-offset-2' : ''
+                      }`}
+                    />
+                  ))}
+                  <span className="text-11 text-gap-muted ml-4 font-medium">
+                    ({product.colors.length})
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        {/* =========================================================
+           4. Promotional Banner section
+           ========================================================= */}
+        <section className="max-w-[1600px] mx-auto px-16 lg:px-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-24">
+            {promoBanners.map((banner, index) => (
+              <div key={index} className="relative aspect-[2/3] bg-gap-gray overflow-hidden border border-gap-border group cursor-pointer">
+                <img 
+                  src={banner.img} 
+                  alt={banner.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  onError={(e) => {
+                    e.currentTarget.src = 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&auto=format&fit=crop&q=80';
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                
+                <div className="absolute bottom-0 left-0 right-0 p-12 md:p-16 text-white z-10 flex flex-col items-start">
+                  <h3 className="text-20 md:text-24 font-bold mb-4 tracking-tight">
+                    {banner.title}
+                  </h3>
+                  <p className="text-12 md:text-13 mb-12 opacity-90">
+                    {banner.subtitle}
+                  </p>
+                  <a 
+                    href="#" 
+                    className="inline-block bg-white text-gap-navy border-2 border-white font-bold text-12 px-14 py-4 transition-all duration-300 hover:bg-transparent hover:text-white uppercase tracking-wider"
+                  >
+                    詳しく見る
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* =========================================================
+           5. SEO & Navigation List Section (上部余白を 100px に調整)
+           ========================================================= */}
+        <section className="bg-white pt-[100px] pb-48 md:pb-64">
+          <div className="max-w-[1200px] mx-auto px-16 lg:px-24">
+            
+            {/* 見出しタイトル ＆ サブテキスト */}
+            <div className="text-center mb-20 md:mb-28">
+              <h2 className="text-42 md:text-60 font-black tracking-widest text-gap-dark mb-12 uppercase">
+                GAP STYLE
+              </h2>
+              <p className="text-14 md:text-16 text-gap-muted font-medium max-w-[600px] mx-auto leading-relaxed">
+                最新トレンドから定番モデルまで。<br className="hidden sm:inline" />
+                あなたの毎日を進化させるスタイルを見つけよう。
+              </p>
+            </div>
+
+            {/* 定番プロダクトサムネイル */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-16 md:gap-24 mb-24 md:mb-32 text-center">
+              {essentialCategories.map((cat, idx) => (
+                <a 
+                  key={idx} 
+                  href="#" 
+                  className="group flex flex-col items-center justify-center p-8 rounded-lg hover:bg-gap-gray transition-colors"
+                >
+                  <div className="w-80 h-80 md:w-[120px] md:h-[120px] flex items-center justify-center mb-8 overflow-hidden">
+                    <img 
+                      src={cat.img} 
+                      alt={cat.name} 
+                      className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.src = cat.fallback;
+                      }}
+                    />
+                  </div>
+                  <span className="text-13 font-bold text-gap-dark group-hover:text-gap-navy">
+                    {cat.name}
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* 4カラム・テキストリンクナビゲーション */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-24 md:gap-32 border-t border-gap-border pt-32">
+              {seoNavigationColumns.map((col, cIdx) => (
+                <div key={cIdx}>
+                  <h3 className="text-15 md:text-16 font-bold text-gap-dark mb-16">
+                    {col.title}
+                  </h3>
+                  <ul className="space-y-10">
+                    {col.links.map((link, lIdx) => (
+                      <li key={lIdx}>
+                        <a 
+                          href="#" 
+                          className="text-13 text-gap-muted hover:text-gap-dark transition-colors"
+                        >
+                          {link}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
       </main>
+
+      {/* フッター */}
+      <Footer />
+
     </div>
   );
 }
