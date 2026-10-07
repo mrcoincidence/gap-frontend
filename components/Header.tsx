@@ -96,7 +96,6 @@ export default function Header() {
          ========================================================= */}
       <div className="hidden lg:block bg-gap-gray border-b border-gap-border py-[4px] px-16 lg:px-24 font-sans text-gap-dark">
         <div className="max-w-[1600px] mx-auto flex justify-between items-center text-12">
-          {/* 左端: Banana Republic */}
           <a 
             href="https://bananarepublic.gap.co.jp/" 
             target="_blank" 
@@ -106,7 +105,6 @@ export default function Header() {
             Banana Republic
           </a>
 
-          {/* 右端: 店舗検索・ヘルプ・ログイン */}
           <div className="flex items-center gap-20">
             <Link href="#" className="flex items-center gap-4 hover:opacity-75">
               <MapPin size={14} />
@@ -125,19 +123,19 @@ export default function Header() {
       </div>
 
       {/* =========================================================
-         2. Main Bar (Sticky Header)
+         2. Main Bar (モバイル時ロゴ高さ48px / 右端見切れ防止調整)
          ========================================================= */}
       <div className={`sticky top-0 bg-white z-50 border-b border-gap-border transition-all duration-200 ${
-        isScrolled ? 'py-4 shadow-sm' : 'py-8'
+        isScrolled ? 'py-4 shadow-sm' : 'py-6 md:py-8'
       }`}>
-        <div className="max-w-[1600px] mx-auto px-16 lg:px-24 flex items-center justify-between">
+        <div className="max-w-[1600px] mx-auto px-12 md:px-16 lg:px-24 flex items-center justify-between">
           
-          {/* 左寄せ: GAP ブラックロゴ */}
-          <div className="flex-shrink-0 flex items-center pr-24">
+          {/* 左寄せ: GAP ブラックロゴ (モバイル時 48px 指定) */}
+          <div className="flex-shrink-0 flex items-center pr-8 md:pr-24">
             <Link href="/" className="inline-block hover:opacity-90 transition-opacity" aria-label="GAP ホーム">
               <svg 
                 className={`transition-all duration-200 w-auto ${
-                  isScrolled ? 'h-[32px]' : 'h-[60px]'
+                  isScrolled ? 'h-[28px] md:h-[32px]' : 'h-[48px] md:h-[60px]'
                 }`} 
                 viewBox="0 0 104 78" 
                 fill="none" 
@@ -163,8 +161,8 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* 右寄せ: 検索 ＆ アイコンエリア */}
-          <div className="flex items-center gap-12 pl-24">
+          {/* 右寄せ: 検索 ＆ アイコンエリア (モバイル時の要素間隔・見切れ調整) */}
+          <div className="flex items-center gap-2 sm:gap-6 md:gap-12 pl-0 md:pl-24 flex-shrink-0">
             
             {/* 検索インプット（デスクトップ） */}
             <div className="hidden md:flex items-center relative w-[160px] lg:w-[200px]">
@@ -177,30 +175,30 @@ export default function Header() {
             </div>
 
             {/* スマホ用 検索アイコン */}
-            <button className="md:hidden text-gap-dark hover:text-gap-navy p-2" aria-label="検索">
-              <Search size={22} />
+            <button className="md:hidden text-gap-dark hover:text-gap-navy p-1.5" aria-label="検索">
+              <Search size={20} />
             </button>
 
             {/* お気に入り（ハートアイコン） */}
-            <Link href="#" className="text-gap-dark hover:text-gap-navy transition-colors p-2" aria-label="お気に入り">
-              <Heart size={22} />
+            <Link href="#" className="text-gap-dark hover:text-gap-navy transition-colors p-1.5" aria-label="お気に入り">
+              <Heart size={20} />
             </Link>
 
             {/* カートアイコン */}
-            <Link href="#" className="text-gap-dark hover:text-gap-navy transition-colors relative flex items-center justify-center p-2" aria-label="カート">
-              <ShoppingBag size={22} />
-              <span className="absolute -top-2 -right-3 bg-gap-red text-white text-[10px] font-bold rounded-full h-15 min-w-[15px] px-3 flex items-center justify-center border border-white leading-none">
+            <Link href="#" className="text-gap-dark hover:text-gap-navy transition-colors relative flex items-center justify-center p-1.5" aria-label="カート">
+              <ShoppingBag size={20} />
+              <span className="absolute -top-1 -right-1 bg-gap-red text-white text-[9px] font-bold rounded-full h-14 min-w-[14px] px-2 flex items-center justify-center border border-white leading-none">
                 0
               </span>
             </Link>
 
-            {/* モバイル ハンバーガーボタン */}
+            {/* モバイル ハンバーガーボタン (flex-shrink-0で絶対に見切れないよう固定) */}
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gap-dark hover:text-gap-navy"
+              className="lg:hidden p-1.5 text-gap-dark hover:text-gap-navy flex-shrink-0"
               aria-label="メニュー開閉"
             >
-              {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
 
           </div>
@@ -208,31 +206,31 @@ export default function Header() {
       </div>
 
       {/* =========================================================
-         3. Announce Bar (スリム化 py-3 / h-28 / インラインスタイルで下線指定)
+         3. Announce Bar
          ========================================================= */}
-      <div className="bg-gap-navy text-white py-3 px-16 text-11 md:text-12 overflow-hidden">
+      <div className="bg-gap-navy text-white py-3 px-12 md:px-16 text-11 md:text-12 overflow-hidden">
         <div className="max-w-[1600px] mx-auto flex items-center justify-between">
-          <button onClick={prevAnnounce} className="p-2 text-white hover:opacity-70 z-10 bg-gap-navy" aria-label="前へ">
+          <button onClick={prevAnnounce} className="p-2 text-white hover:opacity-70 z-10 bg-gap-navy flex-shrink-0" aria-label="前へ">
             <ChevronLeft size={14} />
           </button>
           
           <div className="relative w-full overflow-hidden h-28 flex items-center justify-center">
             <div 
               key={announceIndex} 
-              className="text-center font-bold tracking-wider px-8 animate-slide-left flex items-center justify-center gap-6 leading-tight"
+              className="text-center font-bold tracking-wider px-4 animate-slide-left flex items-center justify-center gap-6 leading-tight"
             >
               <span>{announcements[announceIndex].text}</span>
               <a 
                 href={announcements[announceIndex].href} 
                 style={{ textDecoration: 'underline' }}
-                className="!text-white hover:opacity-80 transition-opacity ml-4 text-11 font-medium whitespace-nowrap"
+                className="!text-white hover:opacity-80 transition-opacity ml-2 text-11 font-medium whitespace-nowrap"
               >
                 {announcements[announceIndex].linkText}
               </a>
             </div>
           </div>
 
-          <button onClick={nextAnnounce} className="p-2 text-white hover:opacity-70 z-10 bg-gap-navy" aria-label="次へ">
+          <button onClick={nextAnnounce} className="p-2 text-white hover:opacity-70 z-10 bg-gap-navy flex-shrink-0" aria-label="次へ">
             <ChevronRight size={14} />
           </button>
         </div>
